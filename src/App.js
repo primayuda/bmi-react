@@ -14,7 +14,6 @@ function App() {
     condition = 'Healthy'
   }
   
-
   function handleChangeHeight(e) {
     setHeight(height = parseFloat(e.target.value));
     // console.log(height);
@@ -31,7 +30,7 @@ function App() {
       <label>Height (m): <input onChange={handleChangeHeight} /></label>
       <label>Weight (kg): <input onChange={handleChangeWeight} /></label>
       
-      <p>BMI : {bmi} This is considered <strong>{condition}</strong></p>
+      <p>BMI : <strong>{bmi}</strong> This is considered <em>{condition}</em></p>
       </header>
     </div>
   );
