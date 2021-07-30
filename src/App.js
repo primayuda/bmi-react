@@ -7,6 +7,8 @@ function App() {
   const [weight, setWeight] = useState(0);
   const [bmi, setBmi] = useState(0)
   let condition = '___'
+  const validInput = !isNaN(height) && !isNaN(weight);
+  const error = validInput ? null : 'Please enter a number';
   
   if (bmi >= 25.00) {
     condition = 'Unhealty'
@@ -26,8 +28,6 @@ function App() {
   function calculate(e) {
     e.preventDefault();
     // console.log(height, weight)
-    const formValid = !isNaN(height) && !isNaN(weight)
-    if (!formValid) return
     setBmi((weight/(height*height)).toFixed(2))
   }
   return (
@@ -36,9 +36,16 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
       <h1>BMI Calculator</h1>
       <form onSubmit={calculate}>
-      <label>Height (m): <input onChange={handleChangeHeight} /></label>
-      <label>Weight (kg): <input onChange={handleChangeWeight} /></label>
-      <button type="submit">Calculate</button>
+        <div>
+      <label>Height (m): <input type='number' step='0.01' placeholder='1.69' onChange={handleChangeHeight} /></label>
+        </div>
+        <div>
+      <label>Weight (kg): <input type='number' onChange={handleChangeWeight} /></label>
+        </div>
+        <div style={{color: 'red'}}>
+          {error}
+        </div>
+      <button disabled={Boolean(error)} type="submit">Calculate</button>
       </form>
       <p>BMI : <strong>{bmi}</strong> This is considered <em>{condition}</em></p>
       </header>
